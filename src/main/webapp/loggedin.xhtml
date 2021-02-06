@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Log In</title>
+    </head>
+    <h:body>
+        <h:link value="index" outcome="index"/><br/>
+
+        <hr/>
+        <h:form>
+            Sell Item: <br/>
+            <fieldset>
+                Name:
+                <h:inputText value="#{login.name}"
+                             id="lIn">
+                </h:inputText>
+                <br/>
+
+                Description:
+                <h:inputTextarea value="#{login.description}"
+                                 id="dIn">
+                </h:inputTextarea>
+                <br/>
+
+                Starting price:
+                <h:inputText value="#{login.startingPrice}"
+                             id="spIn">
+                </h:inputText>
+                <br/>
+
+                End Date:
+                <h:inputText value="#{login.endDate}"
+                             id="edIn">
+                </h:inputText>
+                <br/>
+
+                <h:commandButton value="sell"
+                                 action="#{login.sell()}"/>
+            </fieldset>
+        </h:form>
+
+        Status:
+        #{login.status}
+
+        <br/>
+        <hr/>
+        Item list:
+        <br/>
+        <h:dataTable value="#{login.itemList}" var="i" border="1">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{i.id}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{i.name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Starting Price</f:facet>
+                <h:outputText value="#{i.startingPrice}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">End Date</f:facet>
+                <h:outputText value="#{i.endDate}" style="padding:20px"/>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+
