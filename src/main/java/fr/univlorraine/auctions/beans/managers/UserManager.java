@@ -10,9 +10,11 @@ import fr.univlorraine.auctions.entities.Item;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,7 +28,7 @@ public class UserManager {
     private EntityManager em;
 
     public Long addUser(AppUser u) {
-        if (findByLogin(u.getLogin()).size() != 0) {
+        if (!findByLogin(u.getLogin()).isEmpty()) {
             System.out.println("USER ERROR: login already in DB");
             return -1L;
         }
@@ -51,16 +53,15 @@ public class UserManager {
     }
 
     public List<AppUser> findByLogin(String login) {
-        //TypedQuery<AppUser> q = em.createName
-
-        Query q = em.createNamedQuery("AppUser.findByLogin");
+        TypedQuery q = em.createNamedQuery("AppUser.findByLogin", AppUser.class);
         q.setParameter("login", login);
 
         return q.getResultList();
     }
-
+    
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Item> listItems() {
-        Query q = em.createNamedQuery("Item.list");
+        TypedQuery q = em.createNamedQuery("Item.list", Item.class);
 
         return q.getResultList();
     }
