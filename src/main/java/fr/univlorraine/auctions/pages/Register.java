@@ -7,7 +7,12 @@ package fr.univlorraine.auctions.pages;
 
 import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.AppUser;
+import java.io.Serializable;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.annotation.SessionMap;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +22,7 @@ import javax.inject.Named;
  */
 @Named(value = "register")
 @RequestScoped
-public class Register {
+public class Register implements Serializable {
 
     private String status;
 

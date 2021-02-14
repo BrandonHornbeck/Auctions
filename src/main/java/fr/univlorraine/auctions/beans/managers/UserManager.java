@@ -7,6 +7,7 @@ package fr.univlorraine.auctions.beans.managers;
 
 import fr.univlorraine.auctions.entities.AppUser;
 import fr.univlorraine.auctions.entities.Item;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -57,6 +58,27 @@ public class UserManager {
         q.setParameter("login", login);
 
         return q.getResultList();
+    }
+    
+    public AppUser getByLogin(String login) {
+        List<AppUser> r = findByLogin(login);
+        
+        if(r.isEmpty()) {
+            return null;
+        }
+        return r.get(0);
+    }
+    
+    public boolean sellItem(String name, String description, int sp, LocalDateTime ed, String login) {
+        AppUser u = getByLogin(login);
+        
+        if(u != null) {
+            sellItem(u, new Item(name, description, sp, ed, u));
+            
+            return true;
+        }
+        
+        return false;
     }
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)

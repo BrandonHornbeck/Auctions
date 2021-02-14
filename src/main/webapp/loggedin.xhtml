@@ -6,50 +6,53 @@
     <head>
         <title>Log In</title>
     </head>
-    <h:body>
-        <h:link value="index" outcome="index"/><br/>
+    <h:body>        
+        <h:form>
+            <h:commandButton value="log out"
+                                 action="#{logOut.logOut()}"/>
+        </h:form>
 
         <hr/>
         <h:form>
             Sell Item: <br/>
             <fieldset>
                 Name:
-                <h:inputText value="#{login.name}"
+                <h:inputText value="#{sellItem.name}"
                              id="lIn">
                 </h:inputText>
                 <br/>
 
                 Description:
-                <h:inputTextarea value="#{login.description}"
+                <h:inputTextarea value="#{sellItem.description}"
                                  id="dIn">
                 </h:inputTextarea>
                 <br/>
 
                 Starting price:
-                <h:inputText value="#{login.startingPrice}"
+                <h:inputText value="#{sellItem.startingPrice}"
                              id="spIn">
                 </h:inputText>
                 <br/>
 
                 End Date:
-                <h:inputText value="#{login.endDate}"
+                <h:inputText value="#{sellItem.endDate}"
                              id="edIn">
                 </h:inputText>
                 <br/>
 
                 <h:commandButton value="sell"
-                                 action="#{login.sell()}"/>
+                                 action="#{sellItem.sell()}"/>
             </fieldset>
         </h:form>
 
         Status:
-        #{login.status}
+        #{sellItem.status}
 
         <br/>
         <hr/>
         Item list:
         <br/>
-        <h:dataTable value="#{login.itemList}" var="i" border="1">
+        <h:dataTable value="#{listItems.itemList}" var="i" border="1">
             <h:column>
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{i.id}" style="padding:20px"/>
