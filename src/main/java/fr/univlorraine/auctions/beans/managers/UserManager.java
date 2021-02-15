@@ -98,6 +98,7 @@ public class UserManager {
         return q.getResultList();
     }
     
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Item> listItemsNotEnded() {
         TypedQuery q = em.createNamedQuery("Item.listNotEnded", Item.class);
         q.setParameter("date", LocalDateTime.now());
