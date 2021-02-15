@@ -5,6 +5,7 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.pages.utility.Session;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

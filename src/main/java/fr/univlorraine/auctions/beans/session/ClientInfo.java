@@ -14,5 +14,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface ClientInfo {
-  boolean login(String username, String password);
+  Long login(String username, String password);
 }

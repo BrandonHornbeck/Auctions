@@ -25,13 +25,13 @@ public class ClientInfoLocal implements ClientInfo, Serializable {
     }
     
     @Override
-    public boolean login(String login, String password) {
+    public Long login(String login, String password) {
         for(AppUser u : um.findByLogin(login)) {
             if(u.getLogin().equals(login) && u.getPasswd().equals(password)) {
-                return true;
+                return u.getId();
             }
         }
         
-        return false;
+        return -1L;
     }
 }

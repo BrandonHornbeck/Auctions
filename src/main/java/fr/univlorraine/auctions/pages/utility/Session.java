@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.univlorraine.auctions.pages;
+package fr.univlorraine.auctions.pages.utility;
 
 import fr.univlorraine.auctions.beans.session.ClientInfo;
 import java.util.Map;
@@ -18,6 +18,8 @@ import javax.inject.Inject;
  */
 @RequestScoped
 public class Session {
+    private final static String USER = "session_user";
+    
     private Map<String, Object> sessionMap;
     
     @Inject
@@ -32,23 +34,24 @@ public class Session {
     }
     
     public boolean isConnected() {
-        return sessionMap.containsKey(SessionKeys.USER);
+        return sessionMap.containsKey(USER);
     }
     
-    public String currentUser() {
-        return (String) sessionMap.get(SessionKeys.USER);
+    public Long currentUser() {
+        return (Long) sessionMap.get(USER);
     }
     
     public boolean logIn(String login, String passwd) {
-        if(! isConnected() && clientInfo.login(login, passwd)) {
-            sessionMap.put(SessionKeys.USER, login);
+        Long id = clientInfo.login(login, passwd);
+        if(! isConnected() && id != -1L) {
+            sessionMap.put(USER, id);
             return true;
         }
         return false;
     }
     
     public boolean logOut() {
-        sessionMap.remove(SessionKeys.USER);
+        sessionMap.remove(USER);
         return true;
     }
 }

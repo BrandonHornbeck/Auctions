@@ -36,8 +36,14 @@ public class Item implements Serializable {
 
     @ManyToOne
     private AppUser owner;
+    
+    @ManyToOne
+    private AppUser bidder;
+    private int bid;
 
     public Item() {
+        bid = -1;
+        bidder = null;
     }
 
     public Item(String name, String description, int startingPrice, LocalDateTime endDate, AppUser owner) {
@@ -46,6 +52,29 @@ public class Item implements Serializable {
         this.startingPrice = startingPrice;
         this.endDate = endDate;
         this.owner = owner;
+        
+        bid = -1;
+        bidder = null;
+    }
+
+    public AppUser getBidder() {
+        return bidder;
+    }
+
+    public void setBidder(AppUser bidder) {
+        this.bidder = bidder;
+    }
+
+    public int getBid() {
+        return bid;
+    }
+    
+    public double getPrice() {
+        return Math.max(bid, startingPrice) / 100.0;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
     }
 
     public String getName() {

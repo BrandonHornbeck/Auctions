@@ -5,6 +5,7 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.pages.utility.Session;
 import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.AppUser;
 import fr.univlorraine.auctions.entities.Item;

@@ -52,6 +52,16 @@ public class UserManager {
 
         return u;
     }
+    
+    public Item findItem(Long id) {
+        Item u = em.find(Item.class, id);
+
+        if (u != null) {
+            System.out.println("FIND COMPLETE: " + u);
+        }
+
+        return u;
+    }
 
     public List<AppUser> findByLogin(String login) {
         TypedQuery q = em.createNamedQuery("AppUser.findByLogin", AppUser.class);
@@ -69,8 +79,8 @@ public class UserManager {
         return r.get(0);
     }
     
-    public boolean sellItem(String name, String description, int sp, LocalDateTime ed, String login) {
-        AppUser u = getByLogin(login);
+    public boolean sellItem(String name, String description, int sp, LocalDateTime ed, Long uid) {
+        AppUser u = findUser(uid);
         
         if(u != null) {
             sellItem(u, new Item(name, description, sp, ed, u));
@@ -94,5 +104,20 @@ public class UserManager {
 
         em.persist(i);
         em.merge(u);
+    }
+    
+    public boolean bidOnItem(Long iid, Long uid, int bid) {
+        Item i = findItem(iid);
+        AppUser u = findUser(uid);        
+        
+        if(u != null && i != null && i.getEndDate().compareTo(LocalDateTime.now()) >= 0 && i.getBid() < bid && bid >= i.getStartingPrice()) {
+            i.setBid(bid);
+            i.setBidder(u);
+            em.merge(i);
+            
+            return true;
+        }
+        
+        return false;
     }
 }
