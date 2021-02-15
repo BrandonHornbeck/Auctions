@@ -35,7 +35,7 @@ public class ListItems {
     }
 
     public List<Item> getItemList() {
-        itemList = userManager.listItems();
+        itemList = userManager.listItemsNotEnded();
         return itemList;
     }
 

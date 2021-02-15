@@ -97,6 +97,12 @@ public class UserManager {
 
         return q.getResultList();
     }
+    
+    public List<Item> listItemsNotEnded() {
+        TypedQuery q = em.createNamedQuery("Item.listNotEnded", Item.class);
+        q.setParameter("date", LocalDateTime.now());
+        return q.getResultList();
+    }
 
     public void sellItem(AppUser u, Item i) {
         u.getItems().add(i);

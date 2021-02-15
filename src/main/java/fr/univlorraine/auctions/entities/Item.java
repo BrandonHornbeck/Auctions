@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name = "Item.list",
         query = "SELECT i FROM Item i")
+@NamedQuery(name = "Item.listNotEnded",
+        query = "SELECT i FROM Item i WHERE i.endDate >= :date")
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
