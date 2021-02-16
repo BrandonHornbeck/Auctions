@@ -104,6 +104,13 @@ public class UserManager {
         q.setParameter("date", LocalDateTime.now());
         return q.getResultList();
     }
+    
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Item> listFilteredByName(String name){
+    TypedQuery q = em.createNamedQuery("Item.filter", Item.class);
+    q.setParameter("name", name+"%");
+    return q.getResultList();
+    }
 
     public void sellItem(AppUser u, Item i) {
         u.getItems().add(i);

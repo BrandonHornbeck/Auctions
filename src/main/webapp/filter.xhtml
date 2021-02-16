@@ -4,53 +4,23 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>Log In</title>
+        <title>Filter Items</title>
     </head>
     <h:body>
-        <h:link value="filter" outcome="filter"/><br/>
+        <h:link value="loggedin" outcome="loggedin"/><br/>
         <h:form>
-            <h:commandButton value="log out"
-                                 action="#{logOut.logOut()}"/>
-        </h:form>
-
-        <hr/>
-        <h:form>
-            Sell Item: <br/>
+            Filter: 
             <fieldset>
                 Name:
-                <h:inputText value="#{sellItem.name}"
+                <h:inputText value="#{listItems.name}"
                              id="lIn">
                 </h:inputText>
-                <br/>
-
-                Description:
-                <h:inputTextarea value="#{sellItem.description}"
-                                 id="dIn">
-                </h:inputTextarea>
-                <br/>
-
-                Starting price:
-                <h:inputText value="#{sellItem.startingPrice}"
-                             id="spIn">
-                </h:inputText>
-                <br/>
-
-                End Date:
-                <h:inputText value="#{sellItem.endDate}"
-                             id="edIn">
-                </h:inputText>
-                <br/>
-
-                <h:commandButton value="sell"
-                                 action="#{sellItem.sell()}"/>
-            </fieldset>
+                <h:commandButton value="filter"
+                                 action="#{listItems.filter()}"/>
+            </fieldset>  
         </h:form>
-
-        Status:
-        #{sellItem.status}
+              
         
-        
-
         <br/>
         <hr/>
         Item list:

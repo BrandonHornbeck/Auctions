@@ -23,6 +23,8 @@ import javax.persistence.NamedQuery;
         query = "SELECT i FROM Item i")
 @NamedQuery(name = "Item.listNotEnded",
         query = "SELECT i FROM Item i WHERE i.endDate >= :date")
+@NamedQuery(name = "Item.filter",
+        query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(:name)")
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
