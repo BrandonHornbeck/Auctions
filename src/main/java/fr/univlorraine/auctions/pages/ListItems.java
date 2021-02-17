@@ -59,9 +59,6 @@ public class ListItems {
     }
     
     public List<Item> getItemList() {
-        if (itemList.isEmpty()){
-            itemList = userManager.listItemsNotEnded();
-        }
         return itemList;
     }
 
