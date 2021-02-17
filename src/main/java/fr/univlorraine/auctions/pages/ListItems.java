@@ -29,8 +29,12 @@ public class ListItems {
     private UserManager userManager;
     
     private List<Item> itemList;
+    private List<Item> itemListNotEnded;
     
     private String name;
+    private String category;
+    
+    
     /**
      * Creates a new instance of ListItems
      */
@@ -40,6 +44,14 @@ public class ListItems {
 
     public String getName() {
         return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setName(String name) {
@@ -52,16 +64,28 @@ public class ListItems {
         }
         return itemList;
     }
-    
-    
 
+    public List<Item> getItemListNotEnded() {
+        itemListNotEnded = userManager.listItemsNotEnded();
+        return itemListNotEnded;
+    }
+
+    public void setItemListNotEnded(List<Item> itemListNotEnded) {
+        this.itemListNotEnded = itemListNotEnded;
+    }
+    
+    
+    
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
     }
     
-    public void filter(){
+    public void filterByName(){
         this.itemList = this.userManager.listFilteredByName(this.name);
     }
     
-    
+    public void filterByCategory(){
+        this.itemList = this.userManager.listFilteredByCategory(this.category);
+    }
+   
 }

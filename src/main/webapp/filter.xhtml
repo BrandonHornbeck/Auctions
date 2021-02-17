@@ -16,8 +16,16 @@
                              id="lIn">
                 </h:inputText>
                 <h:commandButton value="filter"
-                                 action="#{listItems.filter()}"/>
-            </fieldset>  
+                                 action="#{listItems.filterByName()}"/>
+            </fieldset> 
+            <fieldset>
+                Category:
+                <h:inputText value="#{listItems.category}"
+                             id="cIn">
+                </h:inputText>
+                <h:commandButton value="filter"
+                                 action="#{listItems.filterByCategory()}"/>
+            </fieldset>
         </h:form>
               
         
@@ -33,6 +41,10 @@
             <h:column>
                 <f:facet name="header">Name</f:facet>
                 <h:outputText value="#{i.name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Category</f:facet>
+                <h:outputText value="#{i.category}" style="padding:20px"/>
             </h:column>
             <h:column>
                 <f:facet name="header">Price</f:facet>

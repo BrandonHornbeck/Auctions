@@ -23,8 +23,10 @@ import javax.persistence.NamedQuery;
         query = "SELECT i FROM Item i")
 @NamedQuery(name = "Item.listNotEnded",
         query = "SELECT i FROM Item i WHERE i.endDate >= :date")
-@NamedQuery(name = "Item.filter",
+@NamedQuery(name = "Item.filterByName",
         query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(:name)")
+@NamedQuery(name = "Item.filterByCategory",
+        query = "SELECT i FROM Item i WHERE LOWER(i.category) LIKE LOWER(:category)") 
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,17 +47,20 @@ public class Item implements Serializable {
     private AppUser bidder;
     private int bid;
 
+    private String category;
+    
     public Item() {
         bid = -1;
         bidder = null;
     }
 
-    public Item(String name, String description, int startingPrice, LocalDateTime endDate, AppUser owner) {
+    public Item(String name, String description, int startingPrice, LocalDateTime endDate, AppUser owner, String category) {
         this.name = name;
         this.description = description;
         this.startingPrice = startingPrice;
         this.endDate = endDate;
         this.owner = owner;
+        this.category = category;
         
         bid = -1;
         bidder = null;
@@ -129,6 +134,16 @@ public class Item implements Serializable {
         this.id = id;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

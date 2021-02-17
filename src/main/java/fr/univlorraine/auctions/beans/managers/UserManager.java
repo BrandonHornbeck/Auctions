@@ -79,11 +79,11 @@ public class UserManager {
         return r.get(0);
     }
     
-    public boolean sellItem(String name, String description, int sp, LocalDateTime ed, Long uid) {
+    public boolean sellItem(String name, String description, int sp, LocalDateTime ed, Long uid, String category) {
         AppUser u = findUser(uid);
         
         if(u != null) {
-            sellItem(u, new Item(name, description, sp, ed, u));
+            sellItem(u, new Item(name, description, sp, ed, u, category));
             
             return true;
         }
@@ -107,8 +107,15 @@ public class UserManager {
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Item> listFilteredByName(String name){
-    TypedQuery q = em.createNamedQuery("Item.filter", Item.class);
-    q.setParameter("name", name+"%");
+        TypedQuery q = em.createNamedQuery("Item.filterByName", Item.class);
+        q.setParameter("name", name+"%");
+    return q.getResultList();
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Item> listFilteredByCategory(String category){
+        TypedQuery q = em.createNamedQuery("Item.filterByCategory", Item.class);
+        q.setParameter("category", category+"%");
     return q.getResultList();
     }
 

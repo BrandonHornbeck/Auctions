@@ -34,6 +34,12 @@
                              id="spIn">
                 </h:inputText>
                 <br/>
+                
+                Category:
+                <h:inputText value="#{sellItem.category}"
+                             id="caIn">
+                </h:inputText>
+                <br/>
 
                 End Date:
                 <h:inputText value="#{sellItem.endDate}"
@@ -55,7 +61,7 @@
         <hr/>
         Item list:
         <br/>
-        <h:dataTable value="#{listItems.itemList}" var="i" border="1">
+        <h:dataTable value="#{listItems.itemListNotEnded}" var="i" border="1">
             <h:column>
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{i.id}" style="padding:20px"/>
@@ -63,6 +69,10 @@
             <h:column>
                 <f:facet name="header">Name</f:facet>
                 <h:outputText value="#{i.name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Category</f:facet>
+                <h:outputText value="#{i.category}" style="padding:20px"/>
             </h:column>
             <h:column>
                 <f:facet name="header">Price</f:facet>

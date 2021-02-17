@@ -32,7 +32,7 @@ public class SellItem {
     private String description;
     private String startingPrice;
     private String endDate;
-    
+    private String category;
     private String status;
     
     /**
@@ -80,6 +80,16 @@ public class SellItem {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
+    
     
     public String sell() {
         if(session.isConnected()) {
@@ -87,7 +97,7 @@ public class SellItem {
             
             LocalDateTime ed = LocalDateTime.parse(endDate);
             
-            if(userManager.sellItem(name, description, sp, ed, session.currentUser())) {
+            if(userManager.sellItem(name, description, sp, ed, session.currentUser(), category)) {
                 status = "success";
             }
             else {
