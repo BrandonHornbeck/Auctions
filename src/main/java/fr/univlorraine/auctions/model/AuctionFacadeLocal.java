@@ -29,5 +29,9 @@ public interface AuctionFacadeLocal {
     List<Auction> findRange(int[] range);
 
     int count();
+
+    public List<Auction> findByUserId(Long userID);
+
+    public Object getHighestBid(int prodId);
     
 }

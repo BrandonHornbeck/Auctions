@@ -8,6 +8,7 @@ package fr.univlorraine.auctions.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -110,6 +111,18 @@ public class AppUser implements Serializable {
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", login=" + login + ", passwd=" + passwd + '}';
+    }
+
+    public int getWithdrawnPenalty() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setWithdrawnPenalty(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setWithdrawnPenaltyDate(Date d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

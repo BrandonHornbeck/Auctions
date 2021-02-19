@@ -6,6 +6,7 @@
 package fr.univlorraine.auctions.model;
 
 import fr.univlorraine.auctions.entities.Item;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,11 @@ public class ItemFacade extends AbstractFacade<Item> implements ItemFacadeLocal 
 
     public ItemFacade() {
         super(Item.class);
+    }
+
+    @Override
+    public List<Item> findByArrayId(List<Integer> arrayProdId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

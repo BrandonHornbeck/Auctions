@@ -6,6 +6,7 @@
 package fr.univlorraine.auctions.model;
 
 import fr.univlorraine.auctions.entities.Auction;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,16 @@ public class AuctionFacade extends AbstractFacade<Auction> implements AuctionFac
 
     public AuctionFacade() {
         super(Auction.class);
+    }
+
+    @Override
+    public List<Auction> findByUserId(Long userID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object getHighestBid(int prodId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
