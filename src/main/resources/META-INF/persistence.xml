@@ -3,6 +3,11 @@
   <persistence-unit name="Auctions-libPU" transaction-type="JTA">
     <class>entities.Item</class>
     <class>entities.AppUser</class>
+    <class>fr.univlorraine.auctions.entities.Auction</class>
+    <class>fr.univlorraine.auctions.entities.Orders</class>
+    <class>fr.univlorraine.auctions.entities.Delivery</class>
+    <class>fr.univlorraine.auctions.entities.Paymentmethod</class>
+    <class>fr.univlorraine.auctions.entities.Transactions</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sun-appserv-samples"/>
       <property name="javax.persistence.jdbc.user" value=""/>
