@@ -34,12 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Paymentmethod.findByCcv", query = "SELECT p FROM Paymentmethod p WHERE p.ccv = :ccv")})
 public class Paymentmethod implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 100)
     @Column(name = "NAME")
     private String name;
@@ -49,6 +43,13 @@ public class Paymentmethod implements Serializable {
     @Size(max = 100)
     @Column(name = "EXPIREDATE")
     private String expiredate;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID")
+    private Integer id;
     @Column(name = "USERID")
     private Integer userid;
     @Column(name = "CCV")
@@ -69,29 +70,6 @@ public class Paymentmethod implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
-    public String getExpiredate() {
-        return expiredate;
-    }
-
-    public void setExpiredate(String expiredate) {
-        this.expiredate = expiredate;
-    }
 
     public Integer getUserid() {
         return userid;
@@ -132,6 +110,30 @@ public class Paymentmethod implements Serializable {
     @Override
     public String toString() {
         return "fr.univlorraine.auctions.entities.Paymentmethod[ id=" + id + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getExpiredate() {
+        return expiredate;
+    }
+
+    public void setExpiredate(String expiredate) {
+        this.expiredate = expiredate;
     }
     
 }

@@ -33,5 +33,7 @@ public interface AuctionFacadeLocal {
     public List<Auction> findByUserId(Long userID);
 
     public Object getHighestBid(int prodId);
+
+    public void callFlush();
     
 }

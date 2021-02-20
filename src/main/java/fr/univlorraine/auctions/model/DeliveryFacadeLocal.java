@@ -6,6 +6,7 @@
 package fr.univlorraine.auctions.model;
 
 import fr.univlorraine.auctions.entities.Delivery;
+import fr.univlorraine.auctions.entities.Item;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,7 @@ public interface DeliveryFacadeLocal {
     List<Delivery> findRange(int[] range);
 
     int count();
+
+    public List<Item> findAllUserId(Long id);
     
 }

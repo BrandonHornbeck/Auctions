@@ -29,5 +29,7 @@ public interface OrdersFacadeLocal {
     List<Orders> findRange(int[] range);
 
     int count();
+
+    public List<Orders> findByBuyerId(Long userID);
     
 }

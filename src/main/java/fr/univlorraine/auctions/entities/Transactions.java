@@ -137,5 +137,9 @@ public class Transactions implements Serializable {
     public String toString() {
         return "fr.univlorraine.auctions.entities.Transactions[ id=" + id + " ]";
     }
+
+    public void setUserId(Object userId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

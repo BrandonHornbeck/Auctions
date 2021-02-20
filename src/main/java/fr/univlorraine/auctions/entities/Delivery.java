@@ -149,5 +149,17 @@ public class Delivery implements Serializable {
     public String toString() {
         return "fr.univlorraine.auctions.entities.Delivery[ id=" + id + " ]";
     }
+
+    public void setUserId(Object userId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setProductName(int productId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCreatedAt(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

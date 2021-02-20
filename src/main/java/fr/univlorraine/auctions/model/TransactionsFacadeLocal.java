@@ -29,5 +29,7 @@ public interface TransactionsFacadeLocal {
     List<Transactions> findRange(int[] range);
 
     int count();
+
+    public List<Transactions> findAllUserId(Long id);
     
 }
