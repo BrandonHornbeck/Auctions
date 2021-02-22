@@ -117,7 +117,7 @@ public class OrderController implements Serializable{
             //create transaction
             Transactions tran;
             tran = new Transactions();
-            tran.setAmount(listOfAuctionProducts.get(i).getPrice().toString());
+            tran.setAmount(String.valueOf(listOfAuctionProducts.get(i).getPrice()));
             tran.setUserId(listOfAuctionProducts.get(i).getUserId());
             tran.setDescription("Product :"+listOfAuctionProducts.get(i).getProductId());
             tran.setStatus(0);
