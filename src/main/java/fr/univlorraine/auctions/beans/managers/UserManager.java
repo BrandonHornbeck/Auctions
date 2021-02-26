@@ -116,7 +116,7 @@ public class UserManager {
     public List<Item> listFilteredByCategory(String category){
         TypedQuery q = em.createNamedQuery("Item.filterByCategory", Item.class);
         q.setParameter("category", category+"%");
-    return q.getResultList();
+        return q.getResultList();
     }
 
     public void sellItem(AppUser u, Item i) {
@@ -140,5 +140,11 @@ public class UserManager {
         }
         
         return false;
+    }
+
+    public List<Item> listUserItemsSelling(Long currentUser) {
+        TypedQuery q = em.createNamedQuery("Item.listItemsBySeller", Item.class);
+        q.setParameter("id", currentUser);
+        return q.getResultList();
     }
 }

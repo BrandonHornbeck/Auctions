@@ -29,7 +29,7 @@ public class ListItems {
     private UserManager userManager;
     
     private List<Item> itemList;
-    private List<Item> itemListNotEnded;
+    private List<Item> itemListSelling;
     
     private String name;
     private String category;
@@ -62,13 +62,13 @@ public class ListItems {
         return itemList;
     }
 
-    public List<Item> getItemListNotEnded() {
-        itemListNotEnded = userManager.listItemsNotEnded();
-        return itemListNotEnded;
+    public List<Item> getItemListSelling() {
+        itemListSelling = userManager.listUserItemsSelling(session.currentUser());
+        return itemListSelling;
     }
 
-    public void setItemListNotEnded(List<Item> itemListNotEnded) {
-        this.itemListNotEnded = itemListNotEnded;
+    public void setItemListSelling(List<Item> itemListSelling) {
+        this.itemListSelling = itemListSelling;
     }
     
     

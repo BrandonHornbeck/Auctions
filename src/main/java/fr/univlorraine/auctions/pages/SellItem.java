@@ -104,6 +104,6 @@ public class SellItem {
                 status = "fail";
             }
         }
-        return "loggedin";
+        return "sell";
     }
 }

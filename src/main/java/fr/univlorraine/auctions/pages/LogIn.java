@@ -50,7 +50,7 @@ public class LogIn implements Serializable {
         
         if(session.logIn(login, passwd)) {
             status = "logged in";
-            return "loggedin";
+            return "sell";
         }
 
         status = "failed: user not found";
