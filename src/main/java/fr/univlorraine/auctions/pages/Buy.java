@@ -6,6 +6,7 @@
 package fr.univlorraine.auctions.pages;
 
 import fr.univlorraine.auctions.beans.managers.UserManager;
+import fr.univlorraine.auctions.entities.AppUser;
 import fr.univlorraine.auctions.entities.Item;
 import fr.univlorraine.auctions.pages.utility.Session;
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class Buy {
     
     private List<Item> cart;
     private List<Item> items;
+    
+    private String creditCardNumber;
+    private String address;
     
     /**
      * Creates a new instance of Bid
@@ -76,6 +80,28 @@ public class Buy {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     
-    
+    public String order() {   
+        if(! creditCardNumber.isEmpty() && !address.isEmpty()) {
+            userManager.orderCart(session.currentUser(), creditCardNumber, address);
+        }
+        
+        return "buy";
+    }
 }

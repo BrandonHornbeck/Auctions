@@ -83,9 +83,7 @@ public class UserManager {
         AppUser u = findUser(uid);
         
         if(u != null) {
-            sellItem(u, new Item(name, description, sp, ed, u, category));
-            
-            return true;
+            return sellItem(u, new Item(name, description, sp, ed, u, category));
         }
         
         return false;
@@ -119,12 +117,17 @@ public class UserManager {
         return q.getResultList();
     }
 
-    public void sellItem(AppUser u, Item i) {
-        u.getItems().add(i);
-        i.setOwner(u);
+    public boolean sellItem(AppUser u, Item i) {
+        if(i.getEndDate().compareTo(LocalDateTime.now()) > 0) {
+            u.getItems().add(i);
+            i.setOwner(u);
 
-        em.persist(i);
-        em.merge(u);
+            em.persist(i);
+            em.merge(u);
+            return true;
+        }
+        
+        return false;
     }
     
     public boolean bidOnItem(Long iid, Long uid, int bid) {
@@ -161,6 +164,23 @@ public class UserManager {
         
         if(i.getBidder().equals(u) && i.getEndDate().compareTo(LocalDateTime.now()) < 0) {
             u.getCart().remove(i);
+            em.merge(u);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean orderCart(Long uid, String ccn, String address) {
+        AppUser u = findUser(uid);
+        
+        if(u != null && !u.getCart().isEmpty()) {
+            for(Item i : u.getCart()) {
+                i.setOrdered(true);
+                em.merge(i);
+            }
+            
+            u.getCart().clear();
             em.merge(u);
             return true;
         }

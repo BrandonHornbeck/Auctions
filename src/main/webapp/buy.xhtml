@@ -17,6 +17,27 @@
         <hr/>
         <br/>
         
+        Order:
+        <br/>
+        <h:form>
+            <fieldset>
+            Credit Card:
+            <h:inputText value="#{buy.creditCardNumber}"
+                             id="ccn"/>
+            <br/>
+            
+            Address:
+            <h:inputText value="#{buy.address}"
+                             id="addr"/><br/>
+            
+            <h:commandButton value="order"
+                                 action="#{buy.order()}"/>
+            </fieldset>
+        </h:form>
+        
+        <hr/>
+        <br/>
+        
         Current Cart:
         <br/>
         <h:dataTable value="#{buy.cart}" var="i" border="1">
