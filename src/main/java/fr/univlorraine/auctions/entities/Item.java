@@ -23,6 +23,8 @@ import javax.persistence.NamedQuery;
         query = "SELECT i FROM Item i")
 @NamedQuery(name = "Item.listItemsBySeller",
         query = "SELECT i FROM Item i WHERE i.owner.id = :id")
+@NamedQuery(name = "Item.listItemsByBuyer",
+        query = "SELECT i FROM Item i WHERE i.bidder.id = :id")
 @NamedQuery(name = "Item.listNotEnded",
         query = "SELECT i FROM Item i WHERE i.endDate >= :date")
 @NamedQuery(name = "Item.filterByName",

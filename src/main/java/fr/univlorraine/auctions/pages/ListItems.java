@@ -10,6 +10,7 @@ import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.Item;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -40,6 +41,11 @@ public class ListItems {
      */
     public ListItems() {
         itemList = new ArrayList();
+    }
+    
+    @PostConstruct
+    public void post() {
+        itemList = userManager.listItemsNotEnded();
     }
 
     public String getName() {

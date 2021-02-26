@@ -141,9 +141,41 @@ public class UserManager {
         
         return false;
     }
+    
+    public boolean addItemToCart(Long iid, Long uid) {
+        Item i = findItem(iid);
+        AppUser u = findUser(uid);
+        
+        if(i.getBidder().equals(u) && i.getEndDate().compareTo(LocalDateTime.now()) < 0) {
+            u.getCart().add(i);
+            em.merge(u);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean removeFromCart(Long iid, Long uid) {
+        Item i = findItem(iid);
+        AppUser u = findUser(uid);
+        
+        if(i.getBidder().equals(u) && i.getEndDate().compareTo(LocalDateTime.now()) < 0) {
+            u.getCart().remove(i);
+            em.merge(u);
+            return true;
+        }
+        
+        return false;
+    }
 
     public List<Item> listUserItemsSelling(Long currentUser) {
         TypedQuery q = em.createNamedQuery("Item.listItemsBySeller", Item.class);
+        q.setParameter("id", currentUser);
+        return q.getResultList();
+    }
+    
+    public List<Item> listUserItemsByBuyer(Long currentUser) {
+        TypedQuery q = em.createNamedQuery("Item.listItemsByBuyer", Item.class);
         q.setParameter("id", currentUser);
         return q.getResultList();
     }

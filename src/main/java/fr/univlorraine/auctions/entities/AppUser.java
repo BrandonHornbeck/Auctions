@@ -8,6 +8,8 @@ package fr.univlorraine.auctions.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,9 +37,13 @@ public class AppUser implements Serializable {
 
     @OneToMany(targetEntity = Item.class, mappedBy = "owner")
     private Collection<Item> items;
+    
+    @OneToMany(targetEntity = Item.class)
+    private Set<Item> cart;
 
     public AppUser() {
         items = new ArrayList<>();
+        cart = new HashSet<>();
     }
 
     public AppUser(String login, String passwd, String name) {
@@ -61,6 +67,14 @@ public class AppUser implements Serializable {
 
     public void setItems(Collection<Item> items) {
         this.items = items;
+    }
+
+    public Set<Item> getCart() {
+        return cart;
+    }
+
+    public void setCart(Set<Item> cart) {
+        this.cart = cart;
     }
 
     public String getName() {
