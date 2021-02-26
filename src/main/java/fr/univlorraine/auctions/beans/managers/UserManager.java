@@ -9,10 +9,14 @@ import fr.univlorraine.auctions.entities.AppUser;
 import fr.univlorraine.auctions.entities.Item;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
+import javax.jms.Destination;
+import javax.jms.JMSContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -171,6 +175,12 @@ public class UserManager {
         return false;
     }
     
+    @Inject
+    private JMSContext c;
+    
+    @Resource(lookup = "jms/OrderQueue")
+    private Destination d;
+    
     public boolean orderCart(Long uid, String ccn, String address) {
         AppUser u = findUser(uid);
         
@@ -179,6 +189,14 @@ public class UserManager {
                 i.setOrdered(true);
                 em.merge(i);
             }
+            
+            Order o = new Order();
+            o.setAddr(address);
+            o.setCcn(ccn);
+            o.setUid(uid);
+            o.getItems().addAll(u.getCart());
+            
+            c.createProducer().send(d, o);
             
             u.getCart().clear();
             em.merge(u);
