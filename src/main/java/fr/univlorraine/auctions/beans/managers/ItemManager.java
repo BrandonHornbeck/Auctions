@@ -25,6 +25,8 @@ public interface ItemManager {
     
     public boolean sellItem(AppUser u, Item i);
     
+    public boolean removeItem(Long iid);
+    
     public boolean bidOnItem(Long iid, Long uid, int bid);
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)

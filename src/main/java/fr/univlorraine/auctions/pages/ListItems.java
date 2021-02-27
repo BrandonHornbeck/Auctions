@@ -65,7 +65,6 @@ public class ListItems {
     }
     
     public List<Item> getItemList() {
-        System.out.println("------->" + name);
         if((name == null || name.trim().isEmpty()) && (category == null || category.trim().isEmpty())) {
             itemList = im.listItemsNotEnded();
         }

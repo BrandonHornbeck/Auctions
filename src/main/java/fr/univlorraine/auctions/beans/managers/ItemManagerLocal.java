@@ -12,7 +12,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -90,7 +89,7 @@ public class ItemManagerLocal implements ItemManager {
     @Override
     public List<Item> listItemsNotEnded() {
         TypedQuery q = em.createNamedQuery("Item.listNotEnded", Item.class);
-        q.setParameter("date", LocalDateTime.now());
+        q.setParameter("date", LocalDateTime.now());        
         return q.getResultList();
     }
     
@@ -98,14 +97,16 @@ public class ItemManagerLocal implements ItemManager {
     @Override
     public List<Item> listFilteredByName(String name) {
         TypedQuery q = em.createNamedQuery("Item.filterByName", Item.class);
+        //q.setParameter("date", LocalDateTime.now());
         q.setParameter("name", name+"%");
-    return q.getResultList();
+        return q.getResultList();
     }
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     public List<Item> listFilteredByCategory(String category) {
         TypedQuery q = em.createNamedQuery("Item.filterByCategory", Item.class);
+        //q.setParameter("date", LocalDateTime.now());
         q.setParameter("category", category+"%");
         return q.getResultList();
     }
@@ -124,5 +125,24 @@ public class ItemManagerLocal implements ItemManager {
         TypedQuery q = em.createNamedQuery("Item.listItemsByBuyer", Item.class);
         q.setParameter("id", currentUser);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean removeItem(Long iid) {
+        Item i = findItem(iid);
+        
+        if(i != null && i.getBidder() == null) {
+            AppUser u = i.getOwner();
+            u.getItems().remove(i);
+            
+            i.setOwner(null);
+            
+            em.merge(u);
+            em.remove(i);
+            
+            return true;
+        }
+        
+        return false;
     }
 }

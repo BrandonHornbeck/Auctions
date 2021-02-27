@@ -108,4 +108,16 @@ public class SellItem {
         }
         return url.sell();
     }
+    
+    public String remove(String id) {
+        if(session.isConnected()) {
+            Long itemId = Long.parseLong(id);
+        
+            im.removeItem(itemId);
+            
+            return url.sell();
+        }
+        
+        return url.home();
+    }
 }

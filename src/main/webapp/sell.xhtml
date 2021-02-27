@@ -86,6 +86,13 @@
                 <f:facet name="header">End Date</f:facet>
                 <h:outputText value="#{i.endDate}" style="padding:20px"/>
             </h:column>
+            
+            <h:column>
+                <f:facet name="header">remove</f:facet>
+                <h:form>
+                    <h:commandButton value="remove" action="#{sellItem.remove(i.id)}"/>
+                </h:form>
+            </h:column>
         </h:dataTable>
     </h:body>
 </html>
