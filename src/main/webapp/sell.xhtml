@@ -86,13 +86,6 @@
                 <f:facet name="header">End Date</f:facet>
                 <h:outputText value="#{i.endDate}" style="padding:20px"/>
             </h:column>
-            <h:column>
-                <f:facet name="header">Bid</f:facet>
-                <h:form>
-                    <h:inputText value="#{bid.bid}" id="bidIn"/>
-                    <h:commandButton value="bid" action="#{bid.bid(i.id)}"/>
-                </h:form>
-            </h:column>
         </h:dataTable>
     </h:body>
 </html>

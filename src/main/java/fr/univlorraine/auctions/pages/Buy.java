@@ -5,10 +5,12 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.beans.managers.CartManager;
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.beans.managers.UserManager;
-import fr.univlorraine.auctions.entities.AppUser;
 import fr.univlorraine.auctions.entities.Item;
 import fr.univlorraine.auctions.pages.utility.Session;
+import fr.univlorraine.auctions.pages.utility.UrlManager;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
@@ -27,7 +29,16 @@ public class Buy {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private UrlManager url;
+    
+    @Inject
+    private CartManager cm;
+    
+    @Inject
+    private UserManager um;
+    
+    @Inject
+    private ItemManager im;
     
     private List<Item> cart;
     private List<Item> items;
@@ -46,25 +57,25 @@ public class Buy {
         Long itemId = Long.parseLong(iid);
         Long uid = session.currentUser();
         
-        boolean res = userManager.addItemToCart(itemId, uid);
+        boolean res = cm.addItemToCart(itemId, uid);
         System.out.println("addToCart: " + uid + " -> " + iid + " : " + res);
         
-        return "buy";
+        return url.buy();
     }
     
     public String removeFromCart(String iid) {
         Long itemId = Long.parseLong(iid);
         Long uid = session.currentUser();
         
-        boolean res = userManager.removeFromCart(itemId, uid);
+        boolean res = cm.removeFromCart(itemId, uid);
         System.out.println("removeFromCart: " + uid + " -> " + iid + " : " + res);
         
-        return "buy";
+        return url.buy();
     }
 
     public List<Item> getCart() {
         cart.clear();
-        cart.addAll(userManager.findUser(session.currentUser()).getCart());
+        cart.addAll(um.findUser(session.currentUser()).getCart());
         return cart;
     }
 
@@ -73,7 +84,7 @@ public class Buy {
     }
 
     public List<Item> getItems() {
-        items = userManager.listUserItemsByBuyer(session.currentUser());
+        items = im.listUserItemsByBuyer(session.currentUser());
         return items;
     }
 
@@ -99,9 +110,9 @@ public class Buy {
     
     public String order() {   
         if(! creditCardNumber.isEmpty() && !address.isEmpty()) {
-            userManager.orderCart(session.currentUser(), creditCardNumber, address);
+            cm.orderCart(session.currentUser(), creditCardNumber, address);
         }
         
-        return "buy";
+        return url.buy();
     }
 }

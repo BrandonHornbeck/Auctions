@@ -5,8 +5,8 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
-import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.Item;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class ListItems {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private ItemManager im;
     
     private List<Item> itemList;
     private List<Item> itemListSelling;
@@ -45,7 +45,7 @@ public class ListItems {
     
     @PostConstruct
     public void post() {
-        itemList = userManager.listItemsNotEnded();
+        itemList = im.listItemsNotEnded();
     }
 
     public String getName() {
@@ -65,11 +65,21 @@ public class ListItems {
     }
     
     public List<Item> getItemList() {
+        System.out.println("------->" + name);
+        if((name == null || name.trim().isEmpty()) && (category == null || category.trim().isEmpty())) {
+            itemList = im.listItemsNotEnded();
+        }
+        else if(name != null && !name.trim().isEmpty()) {
+            filterByName();
+        }
+        else if(category != null && ! category.trim().isEmpty()) {
+            filterByCategory();
+        }
         return itemList;
     }
 
     public List<Item> getItemListSelling() {
-        itemListSelling = userManager.listUserItemsSelling(session.currentUser());
+        itemListSelling = im.listUserItemsSelling(session.currentUser());
         return itemListSelling;
     }
 
@@ -77,18 +87,15 @@ public class ListItems {
         this.itemListSelling = itemListSelling;
     }
     
-    
-    
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
     }
     
     public void filterByName(){
-        this.itemList = this.userManager.listFilteredByName(this.name);
+        this.itemList = this.im.listFilteredByName(this.name.trim());
     }
     
     public void filterByCategory(){
-        this.itemList = this.userManager.listFilteredByCategory(this.category);
+        this.itemList = this.im.listFilteredByCategory(this.category.trim());
     }
-   
 }

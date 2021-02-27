@@ -5,10 +5,9 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
-import fr.univlorraine.auctions.beans.managers.UserManager;
-import fr.univlorraine.auctions.entities.AppUser;
-import fr.univlorraine.auctions.entities.Item;
+import fr.univlorraine.auctions.pages.utility.UrlManager;
 import java.time.LocalDateTime;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -26,7 +25,10 @@ public class SellItem {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private ItemManager im;
+    
+    @Inject
+    private UrlManager url;
     
     private String name;
     private String description;
@@ -97,13 +99,13 @@ public class SellItem {
             
             LocalDateTime ed = LocalDateTime.parse(endDate);
             
-            if(userManager.sellItem(name, description, sp, ed, session.currentUser(), category)) {
+            if(im.sellItem(name, description, sp, ed, session.currentUser(), category)) {
                 status = "success";
             }
             else {
                 status = "fail";
             }
         }
-        return "sell";
+        return url.sell();
     }
 }

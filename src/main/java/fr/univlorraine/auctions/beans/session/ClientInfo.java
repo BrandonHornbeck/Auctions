@@ -5,7 +5,6 @@
  */
 package fr.univlorraine.auctions.beans.session;
 
-import fr.univlorraine.auctions.entities.AppUser;
 import javax.ejb.Local;
 
 /**

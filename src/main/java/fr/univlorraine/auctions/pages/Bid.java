@@ -5,8 +5,9 @@
  */
 package fr.univlorraine.auctions.pages;
 
-import fr.univlorraine.auctions.beans.managers.UserManager;
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
+import fr.univlorraine.auctions.pages.utility.UrlManager;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,7 +24,10 @@ public class Bid {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private ItemManager im;
+    
+    @Inject
+    private UrlManager url;
     
     private String bid;
     /**
@@ -45,9 +49,9 @@ public class Bid {
         Long uid = session.currentUser();
         int b = (int) (Double.parseDouble(bid) * 100);
         
-        boolean res = userManager.bidOnItem(itemId, uid, b);
+        boolean res = im.bidOnItem(itemId, uid, b);
         System.out.println("bid: " + uid + " -> " + iid + " : " + res);
         
-        return "loggedin";
+        return url.filter();
     }
 }
