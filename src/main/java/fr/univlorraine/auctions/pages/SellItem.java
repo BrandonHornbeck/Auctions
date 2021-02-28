@@ -99,8 +99,8 @@ public class SellItem {
         if(session.isConnected()) {
             int sp = (int) (Double.parseDouble(startingPrice) * 100);
             
-            LocalDateTime ed = LocalDate.parse(endDate, ISO_LOCAL_DATE).atStartOfDay();
-            //LocalDateTime ed = LocalDateTime.parse(endDate);
+            //LocalDateTime ed = LocalDate.parse(endDate, ISO_LOCAL_DATE).atStartOfDay();
+            LocalDateTime ed = LocalDateTime.parse(endDate);
             
             if(im.sellItem(name, description, sp, ed, session.currentUser(), category)) {
                 status = "success";
