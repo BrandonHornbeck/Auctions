@@ -150,7 +150,8 @@ public class ItemManagerLocal implements ItemManager {
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     public List<Item> listItemsPrevious() {
-         TypedQuery q = em.createNamedQuery("Item.listItemsPrevious", Item.class);
+        TypedQuery q = em.createNamedQuery("Item.listItemsPrevious", Item.class);
+        q.setParameter("date", LocalDateTime.now());
         return q.getResultList();
     }
 }

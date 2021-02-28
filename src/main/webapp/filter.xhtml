@@ -41,6 +41,12 @@
         
         <br/>
         <hr/>
+        
+        Status:
+        #{bid.bid_status}
+        
+        <br/>
+        <br/>
         Item list:
         <br/>
         <h:dataTable value="#{listItems.itemList}" var="i" border="1">
@@ -73,12 +79,6 @@
                 <h:form>
                     <h:inputText value="#{bid.bid}" id="bidIn"/>
                     <h:commandButton value="bid" action="#{bid.bid(i.id)}"/>
-                </h:form>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Bid status</f:facet>
-                <h:form>
-                    <h:outputText value="#{bid.bid_status}" id="bidIn"/>
                 </h:form>
             </h:column>
         </h:dataTable>

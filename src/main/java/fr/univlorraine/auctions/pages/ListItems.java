@@ -102,6 +102,7 @@ public class ListItems {
     
     public List<Item> getItemListPrevious() {
         itemListPrevious = im.listItemsPrevious();
+        System.out.println("previous: " + itemListPrevious.size());
         return itemListPrevious;
     }
 
