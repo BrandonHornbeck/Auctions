@@ -45,6 +45,14 @@ public class Bid {
     public void setBid(String bid) {
         this.bid = bid;
     }
+
+    public String getBid_status() {
+        return bid_status;
+    }
+
+    public void setBid_status(String bid_status) {
+        this.bid_status = bid_status;
+    }
     
     public String bid(String iid) {
         Long itemId = Long.parseLong(iid);

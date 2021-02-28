@@ -60,7 +60,8 @@ public class Item implements Serializable {
         bidder = null;
     }
 
-    public Item(String name, String description, int startingPrice, LocalDateTime endDate, AppUser owner, String category) {
+    public Item(String name, String description, int startingPrice, 
+            LocalDateTime endDate, AppUser owner, String category) {
         this.name = name;
         this.description = description;
         this.startingPrice = startingPrice;
@@ -72,7 +73,7 @@ public class Item implements Serializable {
         bidder = null;
     }
 
-    public boolean isOrdered() {
+    public boolean getOrdered() {
         return ordered;
     }
 
