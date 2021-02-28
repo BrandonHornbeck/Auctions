@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Filter Items</title>
+    </head>
+    <h:body>
+        <h:link value="filter" outcome="filter"/><br/>
+        <h:link value="sell item" outcome="sell"/><br/>
+        
+        <h:form>
+            <h:commandButton value="log out"
+                                 action="#{logOut.logOut()}"/>
+        </h:form>
+        <hr/>
+        <br/>
+        
+        Order:
+        <br/>
+        <h:form>
+            <fieldset>
+            Credit Card:
+            <h:inputText value="#{buy.creditCardNumber}"
+                             id="ccn"/>
+            <br/>
+            
+            Address:
+            <h:inputText value="#{buy.address}"
+                             id="addr"/><br/>
+            
+            <h:commandButton value="order"
+                                 action="#{buy.order()}"/>
+            </fieldset>
+        </h:form>
+        
+        <hr/>
+        <br/>
+        
+        Current Cart:
+        <br/>
+        <h:dataTable value="#{buy.cart}" var="i" border="1">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{i.id}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{i.name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Category</f:facet>
+                <h:outputText value="#{i.category}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                <h:outputText value="#{i.getPrice()}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">End Date</f:facet>
+                <h:outputText value="#{i.endDate}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">remove from Cart</f:facet>
+                <h:form>
+                    <h:commandButton value="remove from cart" action="#{buy.removeFromCart(i.id)}"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+              
+        
+        <br/>
+        <hr/>
+        Item list:
+        <br/>
+        <h:dataTable value="#{buy.items}" var="i" border="1">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{i.id}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{i.name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Category</f:facet>
+                <h:outputText value="#{i.category}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                <h:outputText value="#{i.getPrice()}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">End Date</f:facet>
+                <h:outputText value="#{i.endDate}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Add To Cart</f:facet>
+                <h:form>
+                    <h:commandButton value="add to cart" action="#{buy.addToCart(i.id)}"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+

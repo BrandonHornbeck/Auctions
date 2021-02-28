@@ -81,6 +81,7 @@ public class ItemManagerLocal implements ItemManager {
     @Override
     public List<Item> listItems() {
         TypedQuery q = em.createNamedQuery("Item.list", Item.class);
+
         return q.getResultList();
     }
     

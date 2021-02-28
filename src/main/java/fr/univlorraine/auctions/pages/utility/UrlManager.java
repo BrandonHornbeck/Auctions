@@ -20,8 +20,15 @@ public class UrlManager implements Serializable {
         return "login";
     }
 
-    public String loggedIn() {
-        return "loggedin";
+    public String sell() {
+        return "sell";
     }
 
+    public String filter() {
+        return "filter";
+    }
+    
+    public String buy() {
+        return "buy";
+    }
 }

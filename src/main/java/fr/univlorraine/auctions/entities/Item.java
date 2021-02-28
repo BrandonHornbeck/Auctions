@@ -21,12 +21,16 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name = "Item.list",
         query = "SELECT i FROM Item i")
+@NamedQuery(name = "Item.listItemsBySeller",
+        query = "SELECT i FROM Item i WHERE i.owner.id = :id AND i.ordered = false")
+@NamedQuery(name = "Item.listItemsByBuyer",
+        query = "SELECT i FROM Item i WHERE i.bidder.id = :id AND i.ordered = false")
 @NamedQuery(name = "Item.listNotEnded",
-        query = "SELECT i FROM Item i WHERE i.endDate >= :date")
+        query = "SELECT i FROM Item i WHERE i.endDate >= :date AND i.ordered = false")
 @NamedQuery(name = "Item.filterByName",
-        query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(:name)")
+        query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(:name) AND i.ordered = false")
 @NamedQuery(name = "Item.filterByCategory",
-        query = "SELECT i FROM Item i WHERE LOWER(i.category) LIKE LOWER(:category)") 
+        query = "SELECT i FROM Item i WHERE LOWER(i.category) LIKE LOWER(:category) AND i.ordered = false") 
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +53,8 @@ public class Item implements Serializable {
 
     private String category;
     
+    private boolean ordered = false;
+    
     public Item() {
         bid = -1;
         bidder = null;
@@ -64,6 +70,14 @@ public class Item implements Serializable {
         
         bid = -1;
         bidder = null;
+    }
+
+    public boolean isOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(boolean ordered) {
+        this.ordered = ordered;
     }
 
     public AppUser getBidder() {

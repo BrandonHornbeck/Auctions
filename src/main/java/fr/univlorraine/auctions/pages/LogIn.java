@@ -6,6 +6,7 @@
 package fr.univlorraine.auctions.pages;
 
 import fr.univlorraine.auctions.pages.utility.Session;
+import fr.univlorraine.auctions.pages.utility.UrlManager;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -26,6 +27,9 @@ public class LogIn implements Serializable {
 
     @Inject
     private Session session;
+    
+    @Inject
+    private UrlManager url;
     
     public LogIn() {
     }
@@ -50,11 +54,11 @@ public class LogIn implements Serializable {
         
         if(session.logIn(login, passwd)) {
             status = "logged in";
-            return "loggedin";
+            return url.sell();
         }
 
         status = "failed: user not found";
-        return "login";
+        return url.login();
     }
 
     public String getStatus() {

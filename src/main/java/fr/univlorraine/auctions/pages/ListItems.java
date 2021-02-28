@@ -7,10 +7,10 @@ package fr.univlorraine.auctions.pages;
 
 import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
-import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.Item;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -27,10 +27,10 @@ public class ListItems {
     private Session session;
     
     @Inject
-    private ItemManager itemManager;
+    private ItemManager im;
     
     private List<Item> itemList;
-    private List<Item> itemListNotEnded;
+    private List<Item> itemListSelling;
     
     private String name;
     private String category;
@@ -41,6 +41,11 @@ public class ListItems {
      */
     public ListItems() {
         itemList = new ArrayList();
+    }
+    
+    @PostConstruct
+    public void post() {
+        itemList = im.listItemsNotEnded();
     }
 
     public String getName() {
@@ -60,31 +65,36 @@ public class ListItems {
     }
     
     public List<Item> getItemList() {
-        itemListNotEnded = itemManager.listItems();
+        if((name == null || name.trim().isEmpty()) && (category == null || category.trim().isEmpty())) {
+            itemList = im.listItemsNotEnded();
+        }
+        else if(name != null && !name.trim().isEmpty()) {
+            filterByName();
+        }
+        else if(category != null && ! category.trim().isEmpty()) {
+            filterByCategory();
+        }
         return itemList;
     }
 
-    public List<Item> getItemListNotEnded() {
-        itemListNotEnded = itemManager.listItemsNotEnded();
-        return itemListNotEnded;
+    public List<Item> getItemListSelling() {
+        itemListSelling = im.listUserItemsSelling(session.currentUser());
+        return itemListSelling;
     }
 
-    public void setItemListNotEnded(List<Item> itemListNotEnded) {
-        this.itemListNotEnded = itemListNotEnded;
+    public void setItemListSelling(List<Item> itemListSelling) {
+        this.itemListSelling = itemListSelling;
     }
-    
-    
     
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
     }
     
     public void filterByName(){
-        this.itemList = this.itemManager.listFilteredByName(this.name);
+        this.itemList = this.im.listFilteredByName(this.name.trim());
     }
     
     public void filterByCategory(){
-        this.itemList = this.itemManager.listFilteredByCategory(this.category);
+        this.itemList = this.im.listFilteredByCategory(this.category.trim());
     }
-   
 }

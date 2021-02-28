@@ -7,7 +7,16 @@
         <title>Filter Items</title>
     </head>
     <h:body>
-        <h:link value="loggedin" outcome="loggedin"/><br/>
+        <h:link value="sell item" outcome="sell"/><br/>
+        <h:link value="buy item" outcome="buy"/><br/>
+        
+        <h:form>
+            <h:commandButton value="log out"
+                                 action="#{logOut.logOut()}"/>
+        </h:form>
+        <hr/>
+        <br/>
+        
         <h:form>
             Filter: 
             <fieldset>

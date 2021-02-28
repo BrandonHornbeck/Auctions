@@ -7,12 +7,9 @@ package fr.univlorraine.auctions.pages;
 
 import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.AppUser;
+import fr.univlorraine.auctions.pages.utility.UrlManager;
 import java.io.Serializable;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.SessionMap;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,6 +29,9 @@ public class Register implements Serializable {
 
     @Inject
     private UserManager userManager;
+    
+    @Inject
+    private UrlManager url;
 
     public Register() {
         status = "";
@@ -80,6 +80,6 @@ public class Register implements Serializable {
             status = "success";
         }
 
-        return "index";
+        return url.home();
     }
 }

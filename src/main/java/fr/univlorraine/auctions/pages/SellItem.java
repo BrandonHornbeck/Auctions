@@ -7,12 +7,8 @@ package fr.univlorraine.auctions.pages;
 
 import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
-import fr.univlorraine.auctions.beans.managers.UserManager;
-import fr.univlorraine.auctions.entities.AppUser;
-import fr.univlorraine.auctions.entities.Item;
-import java.time.LocalDate;
+import fr.univlorraine.auctions.pages.utility.UrlManager;
 import java.time.LocalDateTime;
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -29,7 +25,10 @@ public class SellItem {
     private Session session;
     
     @Inject
-    private ItemManager itemManager;
+    private ItemManager im;
+    
+    @Inject
+    private UrlManager url;
     
     private String name;
     private String description;
@@ -98,15 +97,27 @@ public class SellItem {
         if(session.isConnected()) {
             int sp = (int) (Double.parseDouble(startingPrice) * 100);
             
-            LocalDate ed = LocalDate.parse(endDate, ISO_LOCAL_DATE);
+            LocalDateTime ed = LocalDateTime.parse(endDate);
             
-            if(itemManager.sellItem(name, description, sp,ed.atStartOfDay(), session.currentUser(), category)) {
+            if(im.sellItem(name, description, sp, ed, session.currentUser(), category)) {
                 status = "success";
             }
             else {
                 status = "fail";
             }
         }
-        return "loggedin";
+        return url.sell();
+    }
+    
+    public String remove(String id) {
+        if(session.isConnected()) {
+            Long itemId = Long.parseLong(id);
+        
+            im.removeItem(itemId);
+            
+            return url.sell();
+        }
+        
+        return url.home();
     }
 }
