@@ -4,12 +4,12 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>Sell Item</title>
+        <title>Previous auctions</title>
     </head>
     <h:body>
         <h:link value="filter" outcome="filter"/><br/>
+        <h:link value="sell item" outcome="sell"/><br/>
         <h:link value="buy item" outcome="buy"/><br/>
-        <h:link value="previous auctions" outcome="previous"/><br/>
         
         <h:form>
             <h:commandButton value="log out"
@@ -17,56 +17,12 @@
         </h:form>
         <hr/>
         <br/>
-
-
-        <h:form>
-            Sell Item: <br/>
-            <fieldset>
-                Name:
-                <h:inputText value="#{sellItem.name}"
-                             id="lIn">
-                </h:inputText>
-                <br/>
-
-                Description:
-                <h:inputTextarea value="#{sellItem.description}"
-                                 id="dIn">
-                </h:inputTextarea>
-                <br/>
-
-                Starting price:
-                <h:inputText value="#{sellItem.startingPrice}"
-                             id="spIn">
-                </h:inputText>
-                <br/>
-                
-                Category:
-                <h:inputText value="#{sellItem.category}"
-                             id="caIn">
-                </h:inputText>
-                <br/>
-
-                End Date:
-                <h:inputText value="#{sellItem.endDate}"
-                             id="edIn">
-                </h:inputText>
-                <br/>
-
-                <h:commandButton value="sell"
-                                 action="#{sellItem.sell()}"/>
-            </fieldset>
-        </h:form>
-
-        Status:
-        #{sellItem.status}
-        
-        
-
+      
         <br/>
         <hr/>
         Item list:
         <br/>
-        <h:dataTable value="#{listItems.itemListSelling}" var="i" border="1">
+        <h:dataTable value="#{listItems.listItemsPrevious}" var="i" border="1">
             <h:column>
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{i.id}" style="padding:20px"/>
@@ -91,12 +47,17 @@
                 <f:facet name="header">End Date</f:facet>
                 <h:outputText value="#{i.endDate}" style="padding:20px"/>
             </h:column>
-            
             <h:column>
-                <f:facet name="header">remove</f:facet>
-                <h:form>
-                    <h:commandButton value="remove" action="#{sellItem.remove(i.id)}"/>
-                </h:form>
+                <f:facet name="header">Winner</f:facet>
+                <h:outputText value="#{i.getBidder().name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ordered</f:facet>
+                <h:outputText value="#{i.ordered}" style="padding:20px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Delivered</f:facet>
+                <h:outputText value="#{i.delivered}" style="padding:20px"/>
             </h:column>
         </h:dataTable>
     </h:body>

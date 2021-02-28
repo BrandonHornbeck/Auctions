@@ -31,4 +31,7 @@ public class UrlManager implements Serializable {
     public String buy() {
         return "buy";
     }
+    public String previous() {
+        return "previous";
+    }
 }

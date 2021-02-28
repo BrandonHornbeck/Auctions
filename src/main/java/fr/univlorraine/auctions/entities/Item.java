@@ -31,6 +31,9 @@ import javax.persistence.NamedQuery;
         query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(:name) AND i.ordered = false")
 @NamedQuery(name = "Item.filterByCategory",
         query = "SELECT i FROM Item i WHERE LOWER(i.category) LIKE LOWER(:category) AND i.ordered = false") 
+@NamedQuery(name = "Item.listItemsPrevious",
+        query = "SELECT i FROM Item i WHERE i.endDate <= :date AND i.ordered = true")
+
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +58,8 @@ public class Item implements Serializable {
     
     private boolean ordered = false;
     
+    private boolean delivered= false;
+    
     public Item() {
         bid = -1;
         bidder = null;
@@ -73,12 +78,20 @@ public class Item implements Serializable {
         bidder = null;
     }
 
-    public boolean getOrdered() {
+    public boolean isOrdered() {
         return ordered;
     }
 
     public void setOrdered(boolean ordered) {
         this.ordered = ordered;
+    }
+
+    public boolean isDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
     }
 
     public AppUser getBidder() {

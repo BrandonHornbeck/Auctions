@@ -67,7 +67,8 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" + "ccn=" + ccn + ", addr=" + addr + ", uid=" + uid + ", items=" + items + '}';
+        return "Order{" + "ccn=" + ccn + ", addr=" + addr + ", uid=" + uid +
+                ", items=" + items + '}';
     }
 
     @Override

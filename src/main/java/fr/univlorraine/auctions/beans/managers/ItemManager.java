@@ -46,4 +46,7 @@ public interface ItemManager {
     
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public List<Item> listUserItemsByBuyer(Long currentUser);
+   
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    public List<Item> listItemsPrevious();
 }

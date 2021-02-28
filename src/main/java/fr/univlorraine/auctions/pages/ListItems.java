@@ -31,6 +31,7 @@ public class ListItems {
     
     private List<Item> itemList;
     private List<Item> itemListSelling;
+    private List<Item> itemListPrevious;
     
     private String name;
     private String category;
@@ -65,7 +66,8 @@ public class ListItems {
     }
     
     public List<Item> getItemList() {
-        if((name == null || name.trim().isEmpty()) && (category == null || category.trim().isEmpty())) {
+        if((name == null || name.trim().isEmpty()) && (category == null ||
+                category.trim().isEmpty())) {
             itemList = im.listItemsNotEnded();
         }
         else if(name != null && !name.trim().isEmpty()) {
@@ -96,5 +98,14 @@ public class ListItems {
     
     public void filterByCategory(){
         this.itemList = this.im.listFilteredByCategory(this.category.trim());
+    }
+    
+    public List<Item> getItemListPrevious() {
+        itemListPrevious = im.listItemsPrevious();
+        return itemListPrevious;
+    }
+
+    public void setItemListPrevious(List<Item> itemListPrevious) {
+        this.itemListPrevious = itemListPrevious;
     }
 }
