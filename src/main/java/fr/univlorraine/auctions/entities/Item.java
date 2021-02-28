@@ -32,7 +32,7 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = "Item.filterByCategory",
         query = "SELECT i FROM Item i WHERE LOWER(i.category) LIKE LOWER(:category) AND i.ordered = false") 
 @NamedQuery(name = "Item.listItemsPrevious",
-        query = "SELECT i FROM Item i WHERE i.endDate <:date")
+        query = "SELECT i FROM Item i WHERE (i.endDate < :date) AND (i.endDate =:date AND i.ordered = true)")
 
 public class Item implements Serializable {
 
@@ -186,7 +186,8 @@ public class Item implements Serializable {
             return false;
         }
         Item other = (Item) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null &&
+                !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -194,6 +195,8 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", name=" + name + ", description=" + description + ", startingPrice=" + startingPrice + ", endDate=" + endDate + ", owner=" + owner + '}';
+        return "Item{" + "id=" + id + ", name=" + name + ", description=" +
+                description + ", startingPrice=" + startingPrice +
+                ", endDate=" + endDate + ", owner=" + owner + '}';
     }
 }
