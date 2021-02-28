@@ -32,7 +32,7 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = "Item.filterByCategory",
         query = "SELECT i FROM Item i WHERE LOWER(i.category) LIKE LOWER(:category) AND i.ordered = false") 
 @NamedQuery(name = "Item.listItemsPrevious",
-        query = "SELECT i FROM Item i WHERE i.endDate <= :date AND i.ordered = true")
+        query = "SELECT i FROM Item i WHERE i.endDate <:date")
 
 public class Item implements Serializable {
 
