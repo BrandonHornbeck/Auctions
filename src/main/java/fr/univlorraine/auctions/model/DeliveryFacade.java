@@ -6,6 +6,8 @@
 package fr.univlorraine.auctions.model;
 
 import fr.univlorraine.auctions.entities.Delivery;
+import fr.univlorraine.auctions.entities.Item;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,11 @@ public class DeliveryFacade extends AbstractFacade<Delivery> implements Delivery
 
     public DeliveryFacade() {
         super(Delivery.class);
+    }
+
+    @Override
+    public List<Item> findAllUserId(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

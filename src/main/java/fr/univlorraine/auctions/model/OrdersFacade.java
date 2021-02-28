@@ -6,6 +6,7 @@
 package fr.univlorraine.auctions.model;
 
 import fr.univlorraine.auctions.entities.Orders;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,11 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
 
     public OrdersFacade() {
         super(Orders.class);
+    }
+
+    @Override
+    public List<Orders> findByBuyerId(Long userID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

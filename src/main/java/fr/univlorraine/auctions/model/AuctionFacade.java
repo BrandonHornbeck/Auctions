@@ -39,5 +39,10 @@ public class AuctionFacade extends AbstractFacade<Auction> implements AuctionFac
     public Object getHighestBid(int prodId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void callFlush() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

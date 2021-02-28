@@ -5,11 +5,14 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
 import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.AppUser;
 import fr.univlorraine.auctions.entities.Item;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -26,7 +29,7 @@ public class SellItem {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private ItemManager itemManager;
     
     private String name;
     private String description;
@@ -95,9 +98,9 @@ public class SellItem {
         if(session.isConnected()) {
             int sp = (int) (Double.parseDouble(startingPrice) * 100);
             
-            LocalDateTime ed = LocalDateTime.parse(endDate);
+            LocalDate ed = LocalDate.parse(endDate, ISO_LOCAL_DATE);
             
-            if(userManager.sellItem(name, description, sp, ed, session.currentUser(), category)) {
+            if(itemManager.sellItem(name, description, sp,ed.atStartOfDay(), session.currentUser(), category)) {
                 status = "success";
             }
             else {

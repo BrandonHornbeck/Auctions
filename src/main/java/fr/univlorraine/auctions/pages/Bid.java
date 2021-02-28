@@ -5,6 +5,7 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.pages.utility.Session;
 import javax.inject.Named;
@@ -23,9 +24,10 @@ public class Bid {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private ItemManager itemManager;
     
     private String bid;
+    private String bid_status;
     /**
      * Creates a new instance of Bid
      */
@@ -39,13 +41,28 @@ public class Bid {
     public void setBid(String bid) {
         this.bid = bid;
     }
+
+    public String getBid_status() {
+        return bid_status;
+    }
+
+    public void setBid_status(String bid_status) {
+        this.bid_status = bid_status;
+    }
     
     public String bid(String iid) {
         Long itemId = Long.parseLong(iid);
         Long uid = session.currentUser();
         int b = (int) (Double.parseDouble(bid) * 100);
         
-        boolean res = userManager.bidOnItem(itemId, uid, b);
+        boolean res = itemManager.bidOnItem(itemId, uid, b);
+        
+        if(res){ 
+            setBid_status("bid successfully added");
+        }
+        else { 
+            setBid_status("bid is invalid");
+        };
         System.out.println("bid: " + uid + " -> " + iid + " : " + res);
         
         return "loggedin";

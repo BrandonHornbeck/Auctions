@@ -5,6 +5,7 @@
  */
 package fr.univlorraine.auctions.pages;
 
+import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
 import fr.univlorraine.auctions.beans.managers.UserManager;
 import fr.univlorraine.auctions.entities.Item;
@@ -26,7 +27,7 @@ public class ListItems {
     private Session session;
     
     @Inject
-    private UserManager userManager;
+    private ItemManager itemManager;
     
     private List<Item> itemList;
     private List<Item> itemListNotEnded;
@@ -59,11 +60,12 @@ public class ListItems {
     }
     
     public List<Item> getItemList() {
+        itemListNotEnded = itemManager.listItems();
         return itemList;
     }
 
     public List<Item> getItemListNotEnded() {
-        itemListNotEnded = userManager.listItemsNotEnded();
+        itemListNotEnded = itemManager.listItemsNotEnded();
         return itemListNotEnded;
     }
 
@@ -78,11 +80,11 @@ public class ListItems {
     }
     
     public void filterByName(){
-        this.itemList = this.userManager.listFilteredByName(this.name);
+        this.itemList = this.itemManager.listFilteredByName(this.name);
     }
     
     public void filterByCategory(){
-        this.itemList = this.userManager.listFilteredByCategory(this.category);
+        this.itemList = this.itemManager.listFilteredByCategory(this.category);
     }
    
 }
