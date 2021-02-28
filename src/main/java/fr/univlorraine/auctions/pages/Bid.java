@@ -54,7 +54,7 @@ public class Bid {
         boolean res = im.bidOnItem(itemId, uid, b);
        
         if (res){
-            bid_status = "bid successfully addeed";
+            bid_status = "bid successfully added";
         }
         else {
             bid_status = "bid is invalid";

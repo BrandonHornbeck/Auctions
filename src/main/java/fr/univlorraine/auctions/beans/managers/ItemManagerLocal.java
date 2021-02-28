@@ -66,7 +66,8 @@ public class ItemManagerLocal implements ItemManager {
         Item i = findItem(iid);
         AppUser u = em.find(AppUser.class, uid);
         
-        if(u != null && i != null && i.getEndDate().compareTo(LocalDateTime.now()) >= 0 && i.getBid() < bid && bid >= i.getStartingPrice()) {
+        if(u != null && i != null && i.getEndDate().compareTo(LocalDateTime.now()) 
+                >= 0 && i.getBid() < bid && bid >= i.getStartingPrice()) {
             i.setBid(bid);
             i.setBidder(u);
             em.merge(i);

@@ -8,7 +8,9 @@ package fr.univlorraine.auctions.pages;
 import fr.univlorraine.auctions.beans.managers.ItemManager;
 import fr.univlorraine.auctions.pages.utility.Session;
 import fr.univlorraine.auctions.pages.utility.UrlManager;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -97,7 +99,7 @@ public class SellItem {
         if(session.isConnected()) {
             int sp = (int) (Double.parseDouble(startingPrice) * 100);
             
-            LocalDateTime ed = LocalDateTime.parse(endDate);
+            LocalDateTime ed = LocalDate.parse(endDate, ISO_LOCAL_DATE).atStartOfDay();
             
             if(im.sellItem(name, description, sp, ed, session.currentUser(), category)) {
                 status = "success";
