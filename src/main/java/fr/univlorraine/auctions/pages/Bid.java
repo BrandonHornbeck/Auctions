@@ -30,6 +30,8 @@ public class Bid {
     private UrlManager url;
     
     private String bid;
+    
+    private String bid_status;
     /**
      * Creates a new instance of Bid
      */
@@ -50,6 +52,14 @@ public class Bid {
         int b = (int) (Double.parseDouble(bid) * 100);
         
         boolean res = im.bidOnItem(itemId, uid, b);
+       
+        if (res){
+            bid_status = "bid successfully addeed";
+        }
+        else {
+            bid_status = "bid is invalid";
+        }
+
         System.out.println("bid: " + uid + " -> " + iid + " : " + res);
         
         return url.filter();

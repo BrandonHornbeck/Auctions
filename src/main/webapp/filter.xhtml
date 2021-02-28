@@ -60,6 +60,10 @@
                 <h:outputText value="#{i.getPrice()}" style="padding:20px"/>
             </h:column>
             <h:column>
+                <f:facet name="header">Owner</f:facet>
+                <h:outputText value="#{i.getOwner().name}" style="padding:20px"/>
+            </h:column>
+            <h:column>
                 <f:facet name="header">End Date</f:facet>
                 <h:outputText value="#{i.endDate}" style="padding:20px"/>
             </h:column>
@@ -68,6 +72,12 @@
                 <h:form>
                     <h:inputText value="#{bid.bid}" id="bidIn"/>
                     <h:commandButton value="bid" action="#{bid.bid(i.id)}"/>
+                </h:form>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Bid status</f:facet>
+                <h:form>
+                    <h:outputText value="#{bid.bid_status}" id="bidIn"/>
                 </h:form>
             </h:column>
         </h:dataTable>
